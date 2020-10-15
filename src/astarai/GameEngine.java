@@ -7,6 +7,8 @@ package astarai;
 
 import astarai.ui.GameWindow;
 import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JPanel;
 
 /**
  * This is the main engine that controls the GUI elements along
@@ -20,6 +22,14 @@ public class GameEngine {
     private GameWindow gw;
     private AStar algo;
     private ArrayList<Node> nodes;
+    private int mapWidth;
+    private int mapHeight;
+    private int nodeWidth;
+    private int nodeHeight;
+    private Node[][] nodeMap;
+    private JPanel gamePanel;
+    private double blockChance;
+    private Random rand;
     
     /**
      * Main Constructor
@@ -32,7 +42,61 @@ public class GameEngine {
         this.gw = gw;
         this.xSize = x;
         this.ySize = y;
-        this.nodes = new ArrayList<Node>(x*y);
+        init();
+    }
+    
+    /**
+     * Initialize variables and node map
+     */
+    public void init()
+    {
+        this.nodes = new ArrayList<Node>(xSize*ySize);
+        this.gamePanel = gw.getGamePanel();
+        this.mapWidth = gamePanel.getWidth();
+        this.mapHeight = gamePanel.getHeight();
+        this.nodeMap = new Node[xSize][ySize];
+        this.blockChance = 0.1;
+        this.rand = new Random();
+        
+        //Initialize node and map variables
+        this.nodeWidth = mapWidth / (nodes.size() * 2);
+        this.nodeHeight = mapHeight / (nodes.size() * 2);
+        
+       //Randomize node map
+       randomizeMap();
+    }
+    
+    /**
+     * Randomize the node positions in the map
+     */
+    private void randomizeMap()
+    {
+      //Spawn restraints for nodes
+        int xMin = nodeWidth+1;
+        int xMax = gamePanel.getWidth() - nodeWidth - 1;
+        int yMin = nodeHeight+1;
+        int yMax = gamePanel.getHeight() - nodeHeight - 1;
+        
+        //Randomize map
+        for(int i = 0; i < mapWidth; i++)
+        {
+            for(int j = 0; j < mapHeight; j++)
+            {
+                //Check if node should be blocked
+                if(blockChance > Math.random())
+                {
+                    nodeMap[i][j] = new Node(rand.nextInt(xMax-xMin)+xMin, rand.nextInt(yMax-yMin)+yMin, 1);
+                    nodeMap[i][j].setWidth(nodeWidth);
+                    nodeMap[i][j].setHeight(nodeHeight);
+                }
+                //Not a blocked node
+                else {
+                    nodeMap[i][j] = new Node(rand.nextInt(xMax-xMin)+xMin, rand.nextInt(yMax-yMin)+yMin, 0);
+                    nodeMap[i][j].setWidth(nodeWidth);
+                    nodeMap[i][j].setHeight(nodeHeight);
+                }
+            }
+        }   
     }
     
 }
