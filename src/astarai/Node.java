@@ -1,10 +1,15 @@
 package astarai;
 
+import java.awt.Rectangle;
+import utils.GameExceptions;
+
 public class Node {
 
     private int x, y, f, g, h, type;
     private int width, height;
     private Node parent;
+    private boolean goal;
+    private Rectangle sprite;
 
     public Node(int x, int y, int t) {
         this.x = x;
@@ -13,7 +18,28 @@ public class Node {
         parent = null;
         //type 0 is traverseable, 1 is not
     }
+    
+    public void createSprite() throws GameExceptions.SpriteException
+    {
+        //Error: width and height not set
+        if(width == 0 || height == 0)
+        {
+            throw new GameExceptions.SpriteException("Sprite width or height not set!");
+        }
+        //Otherwise, create sprite
+        sprite = new Rectangle(x,y,width,height);
+    }
 
+    /**
+     * Heuristic function (Manhattan Distance)
+     * @param n
+     * @return 
+     
+    public int error(Node n)
+    {
+        
+    }*/
+    
     //mutator methods to set values
     public void setF() {
         f = g + h;
@@ -37,6 +63,10 @@ public class Node {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public void setGoal(boolean goal) {
+        this.goal = goal;
     }
 
     //accessor methods to get values
@@ -76,6 +106,14 @@ public class Node {
         return height;
     }
     
+    public Rectangle getSprite()
+    {
+        return sprite;
+    }
+
+    public boolean isGoal() {
+        return goal;
+    }
     
 
     public boolean equals(Object in) {
