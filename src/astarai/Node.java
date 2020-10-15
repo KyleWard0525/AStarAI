@@ -124,7 +124,7 @@ public class Node {
     }
 
     public String toString() {
-        return "Node: " + x + "_" + y;
+        return "Node: (" + x + ", " + y + ")";
     }
 
 }
