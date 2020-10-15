@@ -74,8 +74,8 @@ public class GameEngine {
      */
     private void randomizeMap() {
         //Initialize node and map variables
-        this.nodeWidth = mapWidth / (nodeCount * 2);
-        this.nodeHeight = mapHeight / (nodeCount * 2);
+        this.nodeWidth = mapWidth / (nodeCount-(int)(mapWidth*0.15));
+        this.nodeHeight = mapHeight / (nodeCount-(int)(mapHeight*0.25));
 
         //Spawn restraints for nodes
         int xMin = nodeWidth + 1;
@@ -123,6 +123,11 @@ public class GameEngine {
                 }
             }
         }
+    }
+    
+    public void checkNodeCollision()
+    {
+        
     }
 
     /**
