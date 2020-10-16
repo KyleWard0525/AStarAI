@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author user
+ * @author kward60
  */
 public class GameWindow extends javax.swing.JFrame {
 
@@ -41,10 +41,11 @@ public class GameWindow extends javax.swing.JFrame {
         setBackground(new java.awt.Color(51, 51, 51));
         setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
         setForeground(new java.awt.Color(102, 102, 102));
-        setPreferredSize(new java.awt.Dimension(1000, 800));
+        setPreferredSize(new java.awt.Dimension(1000, 1000));
         setResizable(false);
 
         gamePanel.setBackground(new java.awt.Color(51, 51, 51));
+        gamePanel.setPreferredSize(new java.awt.Dimension(900, 820));
 
         javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
         gamePanel.setLayout(gamePanelLayout);
@@ -54,7 +55,7 @@ public class GameWindow extends javax.swing.JFrame {
         );
         gamePanelLayout.setVerticalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 691, Short.MAX_VALUE)
+            .addGap(0, 985, Short.MAX_VALUE)
         );
 
         btnRun.setBackground(new java.awt.Color(51, 51, 51));
@@ -66,7 +67,7 @@ public class GameWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1001, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(406, Short.MAX_VALUE)
                 .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -76,10 +77,10 @@ public class GameWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(gamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         pack();
