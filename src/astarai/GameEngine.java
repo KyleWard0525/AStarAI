@@ -11,6 +11,9 @@ import java.util.Random;
 import javax.swing.JPanel;
 import utils.GameExceptions.SpriteException;
 import java.awt.Color;
+import java.util.Iterator;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 
 /**
  * This is the main engine that controls the GUI elements along with running the
@@ -34,6 +37,8 @@ public class GameEngine {
     private JPanel gamePanel;
     private double blockChance;
     private Random rand;
+    private boolean collision;
+    private int collisionCount;
 
     /**
      * Main Constructor
@@ -61,6 +66,8 @@ public class GameEngine {
         this.blockChance = 0.1;
         this.rand = new Random();
         this.nodeCount = xSize * ySize;
+        this.collision = false;
+        this.collisionCount = 0;
 
         //Randomize node map
         randomizeMap();
@@ -74,8 +81,8 @@ public class GameEngine {
      */
     private void randomizeMap() {
         //Initialize node and map variables
-        this.nodeWidth = mapWidth / (nodeCount-(int)(mapWidth*0.15));
-        this.nodeHeight = mapHeight / (nodeCount-(int)(mapHeight*0.25));
+        this.nodeWidth = mapWidth/xSize;
+        this.nodeHeight = mapHeight/ySize;
 
         //Spawn restraints for nodes
         int xMin = nodeWidth + 1;
@@ -89,7 +96,7 @@ public class GameEngine {
                 //Check if node should be blocked
                 if (blockChance > Math.random()) {
                     //Create and initialize node
-                    Node n = new Node(rand.nextInt(xMax - xMin) + xMin, rand.nextInt(yMax - yMin) + yMin, 1);
+                    Node n = new Node(i*65, j*58, 1);
                     n.setWidth(nodeWidth);
                     n.setHeight(nodeHeight);
 
@@ -97,7 +104,7 @@ public class GameEngine {
                     try {
                         n.createSprite();
                     } catch (SpriteException se) {
-                        System.out.println(se.getMessage());
+                        System.out.println("Error: " + se.getMessage());
                     }
 
                     //Add node to map and list
@@ -106,7 +113,7 @@ public class GameEngine {
                 } //Not a blocked node
                 else {
                     //Create and initialize node
-                    Node n = new Node(rand.nextInt(xMax - xMin) + xMin, rand.nextInt(yMax - yMin) + yMin, 0);
+                    Node n = new Node(i*65, j*58, 0);
                     n.setWidth(nodeWidth);
                     n.setHeight(nodeHeight);
 
@@ -114,7 +121,7 @@ public class GameEngine {
                     try {
                         n.createSprite();
                     } catch (SpriteException se) {
-                        System.out.println(se.getMessage());
+                        System.out.println("Error:" + se.getMessage());
                     }
 
                     //Add node to map and list
@@ -124,26 +131,32 @@ public class GameEngine {
             }
         }
     }
-    
-    public void checkNodeCollision()
-    {
-        
-    }
 
     /**
      * Finalize node sprites and draw them
      */
     private void drawMap() {
         
-        System.out.println("in drawMap()");
-        
         //Loop through nodes and create node panels
         for (int i = 0; i < nodeCount; i++) {
             Node n = nodes.get(i);
             JPanel nodePanel = new JPanel();
+            JLabel nodeID = new JLabel(Integer.toString(i));
+            nodePanel.add(nodeID);
             nodePanel.setSize((int)n.getSprite().getWidth(), (int)n.getSprite().getHeight());
-            nodePanel.setBackground(Color.GREEN);
             nodePanel.setLocation(n.getX(), n.getY());
+            nodePanel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            
+            //Check node type
+            if(n.getType() == 0)
+            {
+                //Node is traversable, Color is green
+                nodePanel.setBackground(Color.GREEN);
+            }
+            //Node is not traversable
+            else {
+                nodePanel.setBackground(Color.RED);
+            }
             
             //Add node panel to game panel
             gamePanel.add(nodePanel);
