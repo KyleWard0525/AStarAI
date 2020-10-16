@@ -6,6 +6,7 @@ import utils.GameExceptions;
 public class Node {
 
     private int x, y, f, g, h, type;
+    private int id;
     private int width, height;
     private Node parent;
     private boolean goal;
@@ -68,6 +69,11 @@ public class Node {
     public void setGoal(boolean goal) {
         this.goal = goal;
     }
+    
+    public void setID(int id)
+    {
+        this.id = id;
+    }
 
     //accessor methods to get values
     public int getF() {
@@ -114,6 +120,11 @@ public class Node {
     public boolean isGoal() {
         return goal;
     }
+
+    public int getId() {
+        return id;
+    }
+    
     
 
     public boolean equals(Object in) {
@@ -126,10 +137,10 @@ public class Node {
     public String toString() {
         if(type != 1)
         {
-        return "Node: (" + x + ", " + y + ")";
+        return "Node: (" + x + ", " + y + "), id = " + id;
         }
         else {
-            return "Node: (" + x + ", " + y + ") BLOCKED";
+            return "Node: (" + x + ", " + y + ") BLOCKED, id = " + id;
         }
     }
 
