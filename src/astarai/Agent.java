@@ -55,7 +55,7 @@ public class Agent {
         
         //Initialize agent's JPanel sprite
         this.agentPanel = new JPanel();
-        agentPanel.setSize(40,40);
+        agentPanel.setSize(width,height);
         JLabel sprtImg = new JLabel(imgSprite);
         agentPanel.add(sprtImg);
     }
