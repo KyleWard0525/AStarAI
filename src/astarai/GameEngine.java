@@ -11,6 +11,9 @@ import java.util.Random;
 import javax.swing.JPanel;
 import utils.GameExceptions.SpriteException;
 import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -36,9 +39,15 @@ public class GameEngine {
     private Node[][] nodeMap;
     private JPanel gamePanel;
     private double blockChance;
+    private boolean startSelected;
+    private boolean goalSelected;
+    private ClickListener clickListen;
+    private Node startNode;
+    private Node goalNode;
+    private final Color startCol = Color.orange;
+    private final Color goalCol = Color.BLUE;
     private Random rand;
-    private boolean collision;
-    private int collisionCount;
+
 
     /**
      * Main Constructor
@@ -66,8 +75,9 @@ public class GameEngine {
         this.blockChance = 0.1;
         this.rand = new Random();
         this.nodeCount = xSize * ySize;
-        this.collision = false;
-        this.collisionCount = 0;
+        this.startSelected = false;
+        this.goalSelected = false;
+        this.clickListen = new ClickListener();
 
         //Randomize node map
         randomizeMap();
@@ -99,6 +109,7 @@ public class GameEngine {
                     Node n = new Node(i*65, j*58, 1);
                     n.setWidth(nodeWidth);
                     n.setHeight(nodeHeight);
+                    n.setID(nodes.size());
 
                     //Create node sprite
                     try {
@@ -116,6 +127,7 @@ public class GameEngine {
                     Node n = new Node(i*65, j*58, 0);
                     n.setWidth(nodeWidth);
                     n.setHeight(nodeHeight);
+                    n.setID(nodes.size());
 
                     //Create node sprite
                     try {
@@ -143,6 +155,7 @@ public class GameEngine {
             JPanel nodePanel = new JPanel();
             JLabel nodeID = new JLabel(Integer.toString(i));
             nodePanel.add(nodeID);
+            nodePanel.addMouseListener(clickListen);
             nodePanel.setSize((int)n.getSprite().getWidth(), (int)n.getSprite().getHeight());
             nodePanel.setLocation(n.getX(), n.getY());
             nodePanel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
@@ -168,4 +181,92 @@ public class GameEngine {
         gamePanel.validate();
     }
 
+    /**
+     * Helper class used to listen for mouse clicks
+     */
+    private class ClickListener implements MouseListener
+    {
+        private ArrayList<Node> nodeList;
+        //public ClickListener()
+
+        @Override
+        public void mouseClicked(MouseEvent me) {
+            //Check if click was on JPanel
+            Object src = me.getSource();
+            
+            System.out.println("");
+            
+            if(src instanceof JPanel)
+            {
+                //Create JPanel and corresponding rectangle
+                JPanel clickedPanel = (JPanel) src;
+                
+                
+                //Search through nodes and store start/goal nodes
+                for(Node n : nodes)
+                {
+                    //Node found
+                    if(n.getX() == clickedPanel.getX() && n.getY() == clickedPanel.getY())
+                    {
+                        //Check which node it is
+                        if(!startSelected)
+                        {
+                            startNode = n;
+                            System.out.println("Start node selected!");
+                            System.out.println("Start node: " + n.toString());
+                        }
+                        else if(!goalSelected){
+                            goalNode = n;
+                            System.out.println("Goal node selected!");
+                            System.out.println("Goal node: " + n.toString());
+                        }
+                    }
+                    
+                }
+                
+                //Color the start and goal panels' borders
+                if(!goalSelected)
+                {
+                //Check if this panel is the first pressed (start panel)
+                if(!startSelected)
+                {
+                    clickedPanel.setBorder(BorderFactory.createLineBorder(startCol, 3));
+                    startSelected = true;
+                }
+                //Goal panel
+                else {
+                    clickedPanel.setBorder(BorderFactory.createLineBorder(goalCol, 3));
+                    goalSelected = true;
+                }
+                
+                
+                
+                }
+                
+            }
+            
+        }
+
+        @Override
+        public void mousePressed(MouseEvent me) {
+            
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+            
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent me) {
+            
+        }
+
+        @Override
+        public void mouseExited(MouseEvent me) {
+            
+        }
+        
+    }
+    
 }
