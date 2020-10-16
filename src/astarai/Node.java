@@ -124,7 +124,13 @@ public class Node {
     }
 
     public String toString() {
+        if(type != 1)
+        {
         return "Node: (" + x + ", " + y + ")";
+        }
+        else {
+            return "Node: (" + x + ", " + y + ") BLOCKED";
+        }
     }
 
 }
