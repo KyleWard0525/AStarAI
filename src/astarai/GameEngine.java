@@ -11,6 +11,7 @@ import java.util.Random;
 import javax.swing.JPanel;
 import utils.GameExceptions.SpriteException;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -29,7 +30,7 @@ public class GameEngine {
     private int xSize;
     private int ySize;
     private GameWindow gw;
-    private AStar algo;
+    private Agent algo;
     private ArrayList<Node> nodes;
     private int mapWidth;
     private int mapHeight;
@@ -44,6 +45,8 @@ public class GameEngine {
     private ClickListener clickListen;
     private Node startNode;
     private Node goalNode;
+    private Node agentNode;
+    private Agent agent;
     private final Color startCol = Color.orange;
     private final Color goalCol = Color.BLUE;
     private Random rand;
@@ -173,21 +176,56 @@ public class GameEngine {
             
             //Add node panel to game panel
             gamePanel.add(nodePanel);
-            System.out.println(n.toString());
         }
 
         //Refresh game panel
         gamePanel.repaint();
         gamePanel.validate();
     }
+    
+    public void drawAgent()
+    {
+        //Start position not selected
+        if(!startSelected)
+        {
+            System.out.println("Error: no start position selected");
+            return;
+        }
+        
+        //Initialize variables
+        agentNode = agent.getCurrNode();
+        JPanel agentSprite = agent.getAgentPanel();
+        Component[] comps = agentSprite.getComponents();
+        
+        //Loop through components and search for the
+        //JPanel corresponding to the agent node
+        System.out.println("In drawAgent()");
+        
+        for(int i = 0; i < comps.length; i++)
+        {
+            //Component is a JPanel
+            if (comps[i] instanceof JPanel)
+            {
+                JPanel p = (JPanel)comps[i];
+                
+                //Match found
+                if(agentNode.getX() == p.getX() && agentNode.getY() == p.getY())
+                {
+                    //Add agent sprite to panel
+                    p.add(agentSprite);
+                    System.out.println("Agent sprite loaded...");
+                }
+            }
+        }
+        
+    }
+    
 
     /**
      * Helper class used to listen for mouse clicks
      */
     private class ClickListener implements MouseListener
     {
-        private ArrayList<Node> nodeList;
-        //public ClickListener()
 
         @Override
         public void mouseClicked(MouseEvent me) {
@@ -214,6 +252,9 @@ public class GameEngine {
                             startNode = n;
                             System.out.println("Start node selected!");
                             System.out.println("Start node: " + n.toString());
+                            
+                            //Initialize AI
+                            agent = new Agent(startNode);
                         }
                         else if(!goalSelected){
                             goalNode = n;
@@ -232,15 +273,15 @@ public class GameEngine {
                 {
                     clickedPanel.setBorder(BorderFactory.createLineBorder(startCol, 3));
                     startSelected = true;
+                    
+                    //Draw agent sprite
+                    drawAgent();
                 }
                 //Goal panel
                 else {
                     clickedPanel.setBorder(BorderFactory.createLineBorder(goalCol, 3));
                     goalSelected = true;
                 }
-                
-                
-                
                 }
                 
             }
