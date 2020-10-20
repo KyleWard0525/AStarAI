@@ -1,6 +1,7 @@
 package astarai;
 
 import java.awt.Rectangle;
+import javax.swing.JPanel;
 import utils.GameExceptions;
 
 public class Node {
@@ -11,10 +12,12 @@ public class Node {
     private Node parent;
     private boolean goal;
     private Rectangle sprite;
+    private JPanel panel;
 
     public Node(int x, int y, int t) {
         this.x = x;
         this.y = y;
+        this.panel = new JPanel();
         type = t;
         parent = null;
         //type 0 is traverseable, 1 is not
@@ -75,6 +78,11 @@ public class Node {
         this.id = id;
     }
 
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+    
+   
     //accessor methods to get values
     public int getF() {
         return f;
@@ -123,6 +131,10 @@ public class Node {
 
     public int getId() {
         return id;
+    }
+
+    public JPanel getPanel() {
+        return panel;
     }
     
     
