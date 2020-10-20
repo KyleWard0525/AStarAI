@@ -103,6 +103,9 @@ public class GameEngine {
         int yMin = nodeHeight + 1;
         int yMax = gamePanel.getHeight() - nodeHeight - 1;
 
+        System.out.println("Node width: " + nodeWidth);
+        System.out.println("Node height: " + nodeHeight);
+        
         //Randomize map
         for (int i = 0; i < xSize; i++) {
             for (int j = 0; j < ySize; j++) {
@@ -174,6 +177,9 @@ public class GameEngine {
                 nodePanel.setBackground(Color.RED);
             }
             
+            //Set node's JPanel
+            n.setPanel(nodePanel);
+            
             //Add node panel to game panel
             gamePanel.add(nodePanel);
         }
@@ -192,32 +198,20 @@ public class GameEngine {
             return;
         }
         
-        //Initialize variables
-        agentNode = agent.getCurrNode();
-        JPanel agentSprite = agent.getAgentPanel();
-        Component[] comps = agentSprite.getComponents();
-        
-        //Loop through components and search for the
-        //JPanel corresponding to the agent node
-        System.out.println("In drawAgent()");
-        
-        for(int i = 0; i < comps.length; i++)
+        //Check if agent has been activated
+        if(!agent.isActive())
         {
-            //Component is a JPanel
-            if (comps[i] instanceof JPanel)
-            {
-                JPanel p = (JPanel)comps[i];
-                
-                //Match found
-                if(agentNode.getX() == p.getX() && agentNode.getY() == p.getY())
-                {
-                    //Add agent sprite to panel
-                    p.add(agentSprite);
-                    System.out.println("Agent sprite loaded...");
-                }
-            }
-        }
+        //Initialize variables
+        JPanel agentSprite = agent.getAgentPanel();
         
+        //Get current panel and add agent sprite
+        JPanel currPanel = agent.getCurrPanel();
+        currPanel.add(agentSprite);
+        }
+        //Agent needs to be redrawn at new node
+        else {
+            JPanel currPanel = agent.getCurrPanel();
+        }
     }
     
 
@@ -255,6 +249,8 @@ public class GameEngine {
                             
                             //Initialize AI
                             agent = new Agent(startNode);
+                            agent.setCurrPanel(clickedPanel);
+                            agent.setNodeList(nodes);
                         }
                         else if(!goalSelected){
                             goalNode = n;
@@ -281,6 +277,7 @@ public class GameEngine {
                 else {
                     clickedPanel.setBorder(BorderFactory.createLineBorder(goalCol, 3));
                     goalSelected = true;
+                    agent.setActive(true);
                 }
                 }
                 
