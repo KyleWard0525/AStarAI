@@ -29,7 +29,7 @@ public class Agent {
     private int y;
     private ImageIcon imgSprite;
     private Node currNode;
-    private JPanel agentPanel;
+    private JPanel agentSprite;
     private JPanel currPanel;
     private boolean active;
     private ArrayList<Node> nodeList;
@@ -59,14 +59,58 @@ public class Agent {
         }
         
         //Initialize agent's JPanel sprite
-        this.agentPanel = new JPanel();
+        this.agentSprite = new JPanel();
         this.currPanel = new JPanel();
-        agentPanel.setSize(width,height);
+        agentSprite.setSize(width,height);
         JLabel sprtImg = new JLabel(imgSprite);
-        agentPanel.add(sprtImg);
+        agentSprite.add(sprtImg);
     }
     
     /***Agent's movement actuators and decision making***/
+    
+    /**
+     * Move the agent up 1 panel
+     */
+    public void moveUp()
+    {
+        //Set currPanel to the panel above it
+        this.currPanel.removeAll();
+        this.currPanel = nodeList.get(currNode.getId() - 1).getPanel();
+        this.currNode = nodeList.get(currNode.getId() - 1);
+    }
+    
+    /**
+     * Move the agent down 1 panel
+     */
+    public void moveDown()
+    {
+        //Set currPanel to the panel below it
+        this.currPanel.removeAll();
+        this.currPanel = nodeList.get(currNode.getId() + 1).getPanel();
+        this.currNode = nodeList.get(currNode.getId() + 1);
+    }
+    
+    /**
+     * Move agent left 1 panel
+     */
+    public void moveLeft()
+    {
+        //Set currPanel to the panel left of it
+        this.currPanel.removeAll();
+        this.currPanel = nodeList.get(currNode.getId() - 15).getPanel();
+        this.currNode = nodeList.get(currNode.getId() - 15);
+    }
+    
+    /**
+     * Move agent right 1 panel
+     */
+    public void moveRight()
+    {
+        //Set currPanel to the panel right of it
+        this.currPanel.removeAll();
+        this.currPanel = nodeList.get(currNode.getId() + 15).getPanel();
+        this.currNode = nodeList.get(currNode.getId() + 15);
+    }
     
     /***Getters and Setters***/
     public int getX() {
@@ -94,8 +138,8 @@ public class Agent {
         this.currNode = currNode;
     }
 
-    public JPanel getAgentPanel() {
-        return agentPanel;
+    public JPanel getAgentSprite() {
+        return agentSprite;
     }
 
     public JPanel getCurrPanel() {
