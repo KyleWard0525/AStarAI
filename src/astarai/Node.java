@@ -8,6 +8,7 @@ public class Node {
 
     //G = cost from start node to this node, H = heuristic, F = G + H
     private int x, y, f, g, h, type;
+    private int row, col;
     private int id;
     private int width, height;
     private Node parent;
@@ -72,6 +73,15 @@ public class Node {
     public void setPanel(JPanel panel) {
         this.panel = panel;
     }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+    
     
    
     //accessor methods to get values
@@ -127,7 +137,14 @@ public class Node {
     public JPanel getPanel() {
         return panel;
     }
-    
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
     
 
     public boolean equals(Object in) {
@@ -140,10 +157,10 @@ public class Node {
     public String toString() {
         if(type != 1)
         {
-        return "Node: (" + x + ", " + y + "), id = " + id;
+        return "Node: (" + row + ", " + col + "), id = " + id;
         }
         else {
-            return "Node: (" + x + ", " + y + ") BLOCKED, id = " + id;
+            return "Node: (" + row + ", " + col + ") BLOCKED, id = " + id;
         }
     }
 
