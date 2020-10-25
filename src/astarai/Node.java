@@ -2,10 +2,11 @@ package astarai;
 
 import java.awt.Rectangle;
 import javax.swing.JPanel;
-import utils.GameExceptions;
+import astarai.utils.GameExceptions;
 
 public class Node {
 
+    //G = cost from start node to this node, H = heuristic, F = G + H
     private int x, y, f, g, h, type;
     private int id;
     private int width, height;
@@ -33,16 +34,6 @@ public class Node {
         //Otherwise, create sprite
         sprite = new Rectangle(x,y,width,height);
     }
-
-    /**
-     * Heuristic function (Manhattan Distance)
-     * @param n
-     * @return 
-     
-    public int error(Node n)
-    {
-        
-    }*/
     
     //mutator methods to set values
     public void setF() {
