@@ -13,11 +13,14 @@ import utils.GameExceptions.SpriteException;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 
 /**
  * This is the main engine that controls the GUI elements along with running the
@@ -39,6 +42,7 @@ public class GameEngine {
     private int nodeCount;
     private Node[][] nodeMap;
     private JPanel gamePanel;
+    private JPanel agentSprite;
     private double blockChance;
     private boolean startSelected;
     private boolean goalSelected;
@@ -47,9 +51,11 @@ public class GameEngine {
     private Node goalNode;
     private Node agentNode;
     private Agent agent;
+    private Random rand;
+    private Timer timer;
     private final Color startCol = Color.orange;
     private final Color goalCol = Color.BLUE;
-    private Random rand;
+    
 
 
     /**
@@ -81,6 +87,7 @@ public class GameEngine {
         this.startSelected = false;
         this.goalSelected = false;
         this.clickListen = new ClickListener();
+        this.timer = new Timer(16, listener); //Renders at ~60fps
 
         //Randomize node map
         randomizeMap();
@@ -102,9 +109,6 @@ public class GameEngine {
         int xMax = gamePanel.getWidth() - nodeWidth - 1;
         int yMin = nodeHeight + 1;
         int yMax = gamePanel.getHeight() - nodeHeight - 1;
-
-        System.out.println("Node width: " + nodeWidth);
-        System.out.println("Node height: " + nodeHeight);
         
         //Randomize map
         for (int i = 0; i < xSize; i++) {
@@ -187,8 +191,14 @@ public class GameEngine {
         //Refresh game panel
         gamePanel.repaint();
         gamePanel.validate();
+        
+        //Start refresh timer
+        timer.start();
     }
     
+    /**
+     * Draw agent on the screen
+     */
     public void drawAgent()
     {
         //Start position not selected
@@ -202,19 +212,42 @@ public class GameEngine {
         if(!agent.isActive())
         {
         //Initialize variables
-        JPanel agentSprite = agent.getAgentPanel();
+        JPanel agentSprite = agent.getAgentSprite();
         
         //Get current panel and add agent sprite
         JPanel currPanel = agent.getCurrPanel();
         currPanel.add(agentSprite);
         }
-        //Agent needs to be redrawn at new node
-        else {
-            JPanel currPanel = agent.getCurrPanel();
-        }
+    }
+    
+    /**
+     * Move agent sprite to next node
+     */
+    public void moveAgent()
+    {
+        //Get agent action and move
+        
+        
+        //Redraw 
+        JPanel agentPanel = agent.getCurrPanel();
+        agentPanel.add(agentSprite);
+        System.out.println("\nAgent moved!");
+        System.out.println("Agent node: " + agent.getCurrNode().toString());
+        
     }
     
 
+    public ActionListener listener = new ActionListener(){
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            //Refresh gamelPanel
+            gamePanel.revalidate();
+            gamePanel.repaint();
+        }
+        
+    };
+    
     /**
      * Helper class used to listen for mouse clicks
      */
@@ -251,6 +284,7 @@ public class GameEngine {
                             agent = new Agent(startNode);
                             agent.setCurrPanel(clickedPanel);
                             agent.setNodeList(nodes);
+                            agentSprite = agent.getAgentSprite();
                         }
                         else if(!goalSelected){
                             goalNode = n;
