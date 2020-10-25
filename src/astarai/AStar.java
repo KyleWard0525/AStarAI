@@ -26,6 +26,7 @@ public class AStar {
     private Node startNode;
     private Node goalNode;
     private Node currNode;
+    protected int pathLength;
     
     /**
      * Default constructor
@@ -42,11 +43,31 @@ public class AStar {
     {
         this.nodeList = GameEngine.nodes;
         this.openList = new PriorityQueue<Node>(nodeList.size(), nodeComp);
-        this.closedList = new PriorityQueue<Node>(nodeList.size());
+        this.closedList = new PriorityQueue<Node>();
         this.nodeMap = GameEngine.nodeMap;
         this.startNode = GameEngine.startNode;
         this.goalNode = GameEngine.goalNode;
+        this.pathLength = 0;
+        
+        //Initialize startNode values
+        startNode.setG(0);
+        computeNodeH(startNode);
+        startNode.setF();
+        
+        //Add startNode to the open list
+        openList.add(startNode);
     }
+    
+    /**
+     * Compute node's heuristic value using the Manhattan Distance
+     * 
+     * @param n 
+     */
+    public void computeNodeH(Node n)
+    {
+        n.setH(Math.abs(n.getRow() - goalNode.getRow()) - Math.abs(n.getCol() - goalNode.getCol()));
+    }
+    
 
     /*** GETTERS AND SETTERS ***/
     public Node getCurrNode() {
