@@ -75,7 +75,7 @@ public class Agent {
     public void moveUp()
     {
         //Set currPanel to the panel above it
-        this.currPanel.removeAll();
+        this.currPanel.remove(agentSprite);
         this.currPanel = nodeList.get(currNode.getId() - 1).getPanel();
         this.currNode = nodeList.get(currNode.getId() - 1);
     }
@@ -86,7 +86,7 @@ public class Agent {
     public void moveDown()
     {
         //Set currPanel to the panel below it
-        this.currPanel.removeAll();
+        this.currPanel.remove(agentSprite);
         this.currPanel = nodeList.get(currNode.getId() + 1).getPanel();
         this.currNode = nodeList.get(currNode.getId() + 1);
     }
@@ -97,7 +97,7 @@ public class Agent {
     public void moveLeft()
     {
         //Set currPanel to the panel left of it
-        this.currPanel.removeAll();
+        this.currPanel.remove(agentSprite);
         this.currPanel = nodeList.get(currNode.getId() - 15).getPanel();
         this.currNode = nodeList.get(currNode.getId() - 15);
     }
@@ -108,7 +108,7 @@ public class Agent {
     public void moveRight()
     {
         //Set currPanel to the panel right of it
-        this.currPanel.removeAll();
+        this.currPanel.remove(agentSprite);
         this.currPanel = nodeList.get(currNode.getId() + 15).getPanel();
         this.currNode = nodeList.get(currNode.getId() + 15);
     }
@@ -119,7 +119,7 @@ public class Agent {
     public void moveUpLeft()
     {
         //Set currPanel to the panel diagonally up and left
-        this.currPanel.removeAll();
+        this.currPanel.remove(agentSprite);
         this.currPanel = nodeList.get(currNode.getId() - 16).getPanel();
         this.currNode = nodeList.get(currNode.getId() - 16);
     }
@@ -130,7 +130,7 @@ public class Agent {
     public void moveDownLeft()
     {
         //Set currPanel to the panel diagonally down and left
-        this.currPanel.removeAll();
+        this.currPanel.remove(agentSprite);
         this.currPanel = nodeList.get(currNode.getId() - 14).getPanel();
         this.currNode = nodeList.get(currNode.getId() - 14);
     }
@@ -141,7 +141,7 @@ public class Agent {
     public void moveUpRight()
     {
         //Set currPanel to the panel diagonally up and right
-        this.currPanel.removeAll();
+        this.currPanel.remove(agentSprite);
         this.currPanel = nodeList.get(currNode.getId() + 14).getPanel();
         this.currNode = nodeList.get(currNode.getId() + 14);
     }
@@ -152,7 +152,7 @@ public class Agent {
     public void moveDownRight()
     {
         //Set currPanel to the panel diagonally up and left
-        this.currPanel.removeAll();
+        this.currPanel.remove(agentSprite);
         this.currPanel = nodeList.get(currNode.getId() + 16).getPanel();
         this.currNode = nodeList.get(currNode.getId() + 16);
     }
