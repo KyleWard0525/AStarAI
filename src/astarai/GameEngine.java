@@ -10,7 +10,7 @@ import astarai.gui.GameWindow;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
-import utils.GameExceptions.SpriteException;
+import astarai.utils.GameExceptions.SpriteException;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Rectangle;
@@ -33,33 +33,29 @@ import javax.swing.Timer;
  */
 public class GameEngine {
 
-    private int xSize;
-    private int ySize;
-    private GameWindow gw;
-    private Agent algo;
-    private ArrayList<Node> nodes;
     private int mapWidth;
     private int mapHeight;
     private int nodeWidth;
     private int nodeHeight;
     private int nodeCount;
-    private Node[][] nodeMap;
-    private JPanel gamePanel;
-    private JPanel agentSprite;
     private double blockChance;
     private boolean startSelected;
     private boolean goalSelected;
     private ClickListener clickListen;
-    private Node startNode;
-    private Node goalNode;
-    private Node agentNode;
     private Agent agent;
     private Random rand;
     private Timer timer;
+    private JPanel gamePanel;
+    private JPanel agentSprite;
+    private GameWindow gw;
     private final Color startCol = Color.orange;
     private final Color goalCol = Color.BLUE;
-    
-
+    protected static Node startNode;
+    protected static Node goalNode;
+    protected static Node[][] nodeMap;
+    protected static int xSize;
+    protected static int ySize;
+    protected static ArrayList<Node> nodes;
 
     /**
      * Main Constructor
@@ -167,6 +163,8 @@ public class GameEngine {
             Node n = nodes.get(i);
             JPanel nodePanel = new JPanel();
             JLabel nodeID = new JLabel(Integer.toString(i));
+            
+            //Initialize nodePanel
             nodePanel.add(nodeID);
             nodePanel.addMouseListener(clickListen);
             nodePanel.setSize((int)n.getSprite().getWidth(), (int)n.getSprite().getHeight());
@@ -294,6 +292,7 @@ public class GameEngine {
                         }
                         else if(!goalSelected){
                             goalNode = n;
+                            goalNode.setGoal(true);
                             System.out.println("Goal node selected!");
                             System.out.println("Goal node: " + n.toString());
                             
