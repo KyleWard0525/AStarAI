@@ -6,6 +6,7 @@
 package astarai.gui;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -35,6 +36,10 @@ public class GameWindow extends javax.swing.JFrame {
 
         gamePanel = new javax.swing.JPanel();
         btnRun = new javax.swing.JButton();
+        lblStartNodeTitle = new javax.swing.JLabel();
+        lblEndNodeTitle = new javax.swing.JLabel();
+        lblStartNode = new javax.swing.JLabel();
+        lblEndNode = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("A* Search");
@@ -54,7 +59,7 @@ public class GameWindow extends javax.swing.JFrame {
         );
         gamePanelLayout.setVerticalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 985, Short.MAX_VALUE)
+            .addGap(0, 988, Short.MAX_VALUE)
         );
 
         btnRun.setBackground(new java.awt.Color(51, 51, 51));
@@ -62,24 +67,54 @@ public class GameWindow extends javax.swing.JFrame {
         btnRun.setForeground(new java.awt.Color(255, 255, 255));
         btnRun.setText("Run");
 
+        lblStartNodeTitle.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblStartNodeTitle.setText("Start Node: ");
+
+        lblEndNodeTitle.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblEndNodeTitle.setText("End Node: ");
+
+        lblStartNode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblStartNode.setText("startNode");
+
+        lblEndNode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblEndNode.setText("endNode");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1001, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(406, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblStartNodeTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblStartNode))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblEndNodeTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEndNode)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
                 .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(386, 386, 386))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblStartNodeTitle)
+                            .addComponent(lblStartNode))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEndNodeTitle)
+                            .addComponent(lblEndNode))))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -124,9 +159,22 @@ public class GameWindow extends javax.swing.JFrame {
     public JPanel getGamePanel() {
         return gamePanel;
     }
+
+    public JLabel getLblEndNode() {
+        return lblEndNode;
+    }
+
+    public JLabel getLblStartNode() {
+        return lblStartNode;
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRun;
     private javax.swing.JPanel gamePanel;
+    private javax.swing.JLabel lblEndNode;
+    private javax.swing.JLabel lblEndNodeTitle;
+    private javax.swing.JLabel lblStartNode;
+    private javax.swing.JLabel lblStartNodeTitle;
     // End of variables declaration//GEN-END:variables
 }

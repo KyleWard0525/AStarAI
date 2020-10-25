@@ -35,8 +35,21 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="gamePanel" alignment="0" pref="1001" max="32767" attributes="0"/>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="406" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="lblStartNodeTitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="lblStartNode" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="lblEndNodeTitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblEndNode" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="221" max="32767" attributes="0"/>
               <Component id="btnRun" min="-2" pref="209" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="386" max="-2" attributes="0"/>
           </Group>
@@ -45,11 +58,23 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
+              <Component id="gamePanel" pref="988" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="gamePanel" pref="985" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnRun" min="-2" pref="44" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnRun" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblStartNodeTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblStartNode" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblEndNodeTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEndNode" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,7 +98,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="985" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="988" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -90,6 +115,38 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Run"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblStartNodeTitle">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Start Node: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEndNodeTitle">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="End Node: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblStartNode">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="startNode"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEndNode">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="endNode"/>
       </Properties>
     </Component>
   </SubComponents>
