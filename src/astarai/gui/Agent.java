@@ -113,6 +113,50 @@ public class Agent {
         this.currNode = nodeList.get(currNode.getId() + 15);
     }
     
+    /**
+     * Move the agent up and left
+     */
+    public void moveUpLeft()
+    {
+        //Set currPanel to the panel diagonally up and left
+        this.currPanel.removeAll();
+        this.currPanel = nodeList.get(currNode.getId() - 16).getPanel();
+        this.currNode = nodeList.get(currNode.getId() - 16);
+    }
+    
+    /**
+     * Move agent down and left
+     */
+    public void moveDownLeft()
+    {
+        //Set currPanel to the panel diagonally down and left
+        this.currPanel.removeAll();
+        this.currPanel = nodeList.get(currNode.getId() - 14).getPanel();
+        this.currNode = nodeList.get(currNode.getId() - 14);
+    }
+    
+    /**
+     * Move agent up and right
+     */
+    public void moveUpRight()
+    {
+        //Set currPanel to the panel diagonally up and right
+        this.currPanel.removeAll();
+        this.currPanel = nodeList.get(currNode.getId() + 14).getPanel();
+        this.currNode = nodeList.get(currNode.getId() + 14);
+    }
+    
+    /**
+     * Move agent down and right
+     */
+    public void moveDownRight()
+    {
+        //Set currPanel to the panel diagonally up and left
+        this.currPanel.removeAll();
+        this.currPanel = nodeList.get(currNode.getId() + 16).getPanel();
+        this.currNode = nodeList.get(currNode.getId() + 16);
+    }
+    
     /***Getters and Setters***/
     public int getX() {
         return x;
