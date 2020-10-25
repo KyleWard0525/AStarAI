@@ -5,7 +5,8 @@
  */
 package astarai;
 
-import astarai.ui.GameWindow;
+import astarai.gui.Agent;
+import astarai.gui.GameWindow;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
@@ -17,7 +18,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.Timer;
@@ -231,7 +234,6 @@ public class GameEngine {
         //Redraw 
         JPanel agentPanel = agent.getCurrPanel();
         agentPanel.add(agentSprite);
-        System.out.println("\nAgent moved!");
         System.out.println("Agent node: " + agent.getCurrNode().toString());
         
     }
@@ -285,11 +287,19 @@ public class GameEngine {
                             agent.setCurrPanel(clickedPanel);
                             agent.setNodeList(nodes);
                             agentSprite = agent.getAgentSprite();
+                            
+                            //Update start node label
+                            gw.getLblStartNode().setForeground(startCol);
+                            gw.getLblStartNode().setText(startNode.toString());
                         }
                         else if(!goalSelected){
                             goalNode = n;
                             System.out.println("Goal node selected!");
                             System.out.println("Goal node: " + n.toString());
+                            
+                            //Update end node label
+                            gw.getLblEndNode().setForeground(goalCol);
+                            gw.getLblEndNode().setText(goalNode.toString());
                         }
                     }
                     
