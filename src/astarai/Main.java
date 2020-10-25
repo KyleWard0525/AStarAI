@@ -5,7 +5,7 @@
  */
 package astarai;
 
-import astarai.ui.GameWindow;
+import astarai.gui.GameWindow;
 import java.lang.Thread;
 import java.util.logging.Level;
 import java.util.logging.Logger;
