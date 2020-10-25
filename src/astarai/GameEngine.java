@@ -119,6 +119,8 @@ public class GameEngine {
                     n.setWidth(nodeWidth);
                     n.setHeight(nodeHeight);
                     n.setID(nodes.size());
+                    n.setRow(j);
+                    n.setCol(i);
 
                     //Create node sprite
                     try {
@@ -137,6 +139,8 @@ public class GameEngine {
                     n.setWidth(nodeWidth);
                     n.setHeight(nodeHeight);
                     n.setID(nodes.size());
+                    n.setRow(j);
+                    n.setCol(i);
 
                     //Create node sprite
                     try {
