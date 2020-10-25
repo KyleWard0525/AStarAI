@@ -21,6 +21,8 @@ import java.awt.event.MouseListener;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.Timer;
@@ -93,6 +95,9 @@ public class GameEngine {
         
         //Draw map
         drawMap();
+        
+        //Start refresh timer
+        timer.start();
     }
 
     /**
@@ -197,8 +202,7 @@ public class GameEngine {
         gamePanel.repaint();
         gamePanel.validate();
         
-        //Start refresh timer
-        timer.start();
+        
     }
     
     /**
@@ -230,13 +234,12 @@ public class GameEngine {
      */
     public void moveAgent()
     {
-        //Get agent action and move
-        
+        //Get next node and move agent
         
         //Redraw 
         JPanel agentPanel = agent.getCurrPanel();
         agentPanel.add(agentSprite);
-        System.out.println("Agent node: " + agent.getCurrNode().toString());
+        System.out.println("\nAgent node: " + agent.getCurrNode().toString());
         
     }
     
