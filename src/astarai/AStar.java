@@ -5,14 +5,84 @@
  */
 package astarai;
 
-import java.util.Random;
-import javax.swing.JPanel;
+import astarai.gui.Agent;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
- * This is the implementation of the A* algorithm
+ * This is the implementation of the A* algorithm in order
+ * to solve the map
+ * 
  * @author kward60
  */
 public class AStar {
     
+    private Queue<Node> openList;
+    private Queue<Node> closedList;
+    private ArrayList<Node> nodeList;
+    private Node[][] nodeMap;
+    private Node startNode;
+    private Node goalNode;
+    private Node currNode;
+    protected int pathLength;
     
+    /**
+     * Default constructor
+     */
+    public AStar()
+    {
+        init();
+    }
+    
+    /**
+     * Initialize global variables
+     */
+    private void init()
+    {
+        this.nodeList = GameEngine.nodes;
+        this.openList = new PriorityQueue<Node>(nodeList.size(), nodeComp);
+        this.closedList = new PriorityQueue<Node>();
+        this.nodeMap = GameEngine.nodeMap;
+        this.startNode = GameEngine.startNode;
+        this.goalNode = GameEngine.goalNode;
+        this.pathLength = 0;
+        
+        //Initialize startNode values
+        startNode.setG(0);
+        computeNodeH(startNode);
+        startNode.setF();
+        
+        //Add startNode to the open list
+        openList.add(startNode);
+    }
+    
+    /**
+     * Compute node's heuristic value using the Manhattan Distance
+     * 
+     * @param n 
+     */
+    public void computeNodeH(Node n)
+    {
+        n.setH(Math.abs(n.getRow() - goalNode.getRow()) - Math.abs(n.getCol() - goalNode.getCol()));
+    }
+    
+
+    /*** GETTERS AND SETTERS ***/
+    public Node getCurrNode() {
+        return currNode;
+    }
+    
+    public void setCurrNode(Node currNode) {
+        this.currNode = currNode;
+    }
+
+    private static Comparator<Node> nodeComp = new Comparator<Node>() {
+        @Override
+        public int compare(Node t, Node t1) {
+            return (int)(t.getF() - t1.getF());
+        }
+        
+    };
 }

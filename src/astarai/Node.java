@@ -1,19 +1,25 @@
 package astarai;
 
 import java.awt.Rectangle;
-import utils.GameExceptions;
+import javax.swing.JPanel;
+import astarai.utils.GameExceptions;
 
 public class Node {
 
+    //G = cost from start node to this node, H = heuristic, F = G + H
     private int x, y, f, g, h, type;
+    private int row, col;
+    private int id;
     private int width, height;
     private Node parent;
     private boolean goal;
     private Rectangle sprite;
+    private JPanel panel;
 
     public Node(int x, int y, int t) {
         this.x = x;
         this.y = y;
+        this.panel = new JPanel();
         type = t;
         parent = null;
         //type 0 is traverseable, 1 is not
@@ -29,16 +35,6 @@ public class Node {
         //Otherwise, create sprite
         sprite = new Rectangle(x,y,width,height);
     }
-
-    /**
-     * Heuristic function (Manhattan Distance)
-     * @param n
-     * @return 
-     
-    public int error(Node n)
-    {
-        
-    }*/
     
     //mutator methods to set values
     public void setF() {
@@ -68,7 +64,26 @@ public class Node {
     public void setGoal(boolean goal) {
         this.goal = goal;
     }
+    
+    public void setID(int id)
+    {
+        this.id = id;
+    }
 
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+    
+    
+   
     //accessor methods to get values
     public int getF() {
         return f;
@@ -114,6 +129,22 @@ public class Node {
     public boolean isGoal() {
         return goal;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
     
 
     public boolean equals(Object in) {
@@ -126,10 +157,10 @@ public class Node {
     public String toString() {
         if(type != 1)
         {
-        return "Node: (" + x + ", " + y + ")";
+        return "Node: (" + row + ", " + col + "), id = " + id;
         }
         else {
-            return "Node: (" + x + ", " + y + ") BLOCKED";
+            return "Node: (" + row + ", " + col + ") BLOCKED, id = " + id;
         }
     }
 

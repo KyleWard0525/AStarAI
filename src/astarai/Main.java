@@ -5,7 +5,10 @@
  */
 package astarai;
 
-import astarai.ui.GameWindow;
+import astarai.gui.GameWindow;
+import java.lang.Thread;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +25,14 @@ public class Main {
         GameWindow gw = new GameWindow();
         gw.setVisible(true);
         GameEngine engine = new GameEngine(gw, 15, 15);
+        
+        try {
+            Thread.sleep(8000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        engine.moveAgent();
     }
     
 }
