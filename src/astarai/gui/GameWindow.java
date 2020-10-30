@@ -5,6 +5,7 @@
  */
 package astarai.gui;
 
+import astarai.GameEngine;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -66,6 +67,11 @@ public class GameWindow extends javax.swing.JFrame {
         btnRun.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         btnRun.setForeground(new java.awt.Color(255, 255, 255));
         btnRun.setText("Run");
+        btnRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRunActionPerformed(evt);
+            }
+        });
 
         lblStartNodeTitle.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblStartNodeTitle.setText("Start Node: ");
@@ -119,6 +125,11 @@ public class GameWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
+        GameEngine.moveAgent();
+        btnRun.setEnabled(false);
+    }//GEN-LAST:event_btnRunActionPerformed
 
     /**
      * @param args the command line arguments
