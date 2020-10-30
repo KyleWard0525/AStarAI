@@ -203,7 +203,11 @@ public class GameEngine {
         gamePanel.repaint();
         gamePanel.validate();
 
+        //Start game timer
         timer.start();
+        
+        //Prompt user to select start and end nodes
+        JOptionPane.showMessageDialog(gw, "Please select Start (orange) and End (blue) nodes.", "Start", JOptionPane.PLAIN_MESSAGE);
     }
 
     /**
