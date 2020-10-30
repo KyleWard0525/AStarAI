@@ -156,6 +156,7 @@ public class AStar {
             {
                 child.setParent(currNode);
                 currNode = child;
+                System.out.println("Current Node: " + currNode.toString());
                 return true;
             }
             
