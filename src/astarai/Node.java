@@ -14,12 +14,14 @@ public class Node {
     private Node parent;
     private boolean goal;
     private Rectangle sprite;
+    protected Node goalNode;
     private JPanel panel;
 
     public Node(int x, int y, int t) {
         this.x = x;
         this.y = y;
         this.panel = new JPanel();
+        this.goalNode = GameEngine.goalNode;
         type = t;
         parent = null;
         //type 0 is traverseable, 1 is not
@@ -151,16 +153,16 @@ public class Node {
         //typecast to Node
         Node n = (Node) in;
 
-        return x == n.getX() && y == n.getY();
+        return row == n.getRow() && col == n.getCol();
     }
 
     public String toString() {
         if(type != 1)
         {
-        return "Node: (" + row + ", " + col + "), id = " + id;
+        return "Node:(" + row + ", " + col + "), id = " + id;
         }
         else {
-            return "Node: (" + row + ", " + col + ") BLOCKED, id = " + id;
+            return "Node:(" + row + ", " + col + ") BLOCKED, id = " + id;
         }
     }
 
