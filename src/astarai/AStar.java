@@ -102,7 +102,6 @@ public class AStar {
         //Add current node to closed list
         closedList.add(currNode);
         System.out.println("Current node: " + currNode.toString());
-        System.out.println("Path length: " + closedList.size());
         
         //Check if currNode is goal node
         if(currNode.isGoal())
